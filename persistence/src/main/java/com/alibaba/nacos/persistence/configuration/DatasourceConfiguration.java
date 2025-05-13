@@ -46,7 +46,8 @@ public class DatasourceConfiguration implements ApplicationContextInitializer<Co
     public static void setUseExternalDb(boolean useExternalDb) {
         DatasourceConfiguration.useExternalDb = useExternalDb;
     }
-    
+
+    // standalone 启动用的就是嵌入式存储
     public static boolean isEmbeddedStorage() {
         return embeddedStorage;
     }
