@@ -42,20 +42,24 @@ public class NacosTypeExcludeFilter implements TypeFilter {
     
     public NacosTypeExcludeFilter() {
         this.packageExcludeFilters = new HashMap<>(2);
+        // 通过 SPI 加载过滤规则
         for (NacosPackageExcludeFilter each : NacosServiceLoader.load(NacosPackageExcludeFilter.class)) {
             packageExcludeFilters.put(each.getResponsiblePackagePrefix(), each);
             LOGGER.info("Load Nacos package exclude filter success, package prefix {}, filter {}",
                     each.getResponsiblePackagePrefix(), each.getClass().getCanonicalName());
         }
     }
-    
+
+    // 返回 true 时则会过滤掉
     @Override
     public boolean match(MetadataReader metadataReader, MetadataReaderFactory metadataReaderFactory)
             throws IOException {
         // If no exclude filters, all classes should be load.
+        // 没有配置排除规则，所有类都不过滤
         if (packageExcludeFilters.isEmpty()) {
             return false;
         }
+        // 检查当前类是否是一个 @SpringBootApplication 注解的类，如果是就排除它（避免重复扫描引起的冲突）
         boolean isSpringBootApplication = metadataReader.getAnnotationMetadata()
                 .hasAnnotation(SpringBootApplication.class.getCanonicalName());
         String className = metadataReader.getClassMetadata().getClassName();

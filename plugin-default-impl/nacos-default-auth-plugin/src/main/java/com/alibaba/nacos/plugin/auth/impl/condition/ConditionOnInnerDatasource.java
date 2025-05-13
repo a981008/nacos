@@ -31,6 +31,7 @@ public class ConditionOnInnerDatasource implements Condition {
     @Override
     public boolean matches(ConditionContext conditionContext, AnnotatedTypeMetadata annotatedTypeMetadata) {
         return !Constants.NACOS_DEPLOYMENT_TYPE_CONSOLE.equalsIgnoreCase(
+                // 获取 application.properties 中的属性
                 conditionContext.getEnvironment().getProperty(Constants.NACOS_DEPLOYMENT_TYPE));
     }
 }

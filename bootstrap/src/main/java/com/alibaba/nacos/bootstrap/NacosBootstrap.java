@@ -75,11 +75,18 @@ public class NacosBootstrap {
         prepareCoreContext(coreContext);
         ConfigurableApplicationContext webContext = startServerWebContext(args, coreContext);
     }
-    
+
+    /**
+     * 1. {@link com.alibaba.nacos.NacosServerBasicApplication}
+     * 2. {@link com.alibaba.nacos.NacosServerWebApplication}
+     * 3. {@link com.alibaba.nacos.console.NacosConsole}
+     */
     private static void startWithConsole(String[] args) {
         ConfigurableApplicationContext coreContext = startCoreContext(args);
         prepareCoreContext(coreContext);
+        // nacos-server
         ConfigurableApplicationContext serverWebContext = startServerWebContext(args, coreContext);
+        // nacos-console
         ConfigurableApplicationContext consoleContext = startConsoleContext(args, coreContext);
     }
     

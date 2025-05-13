@@ -42,6 +42,7 @@ public class NacosStartUpManager {
     
     private NacosStartUpManager() {
         startUpMap = new HashMap<>();
+        // 利用 SPI 发现 nacos 启动阶段
         for (NacosStartUp each : NacosServiceLoader.load(NacosStartUp.class)) {
             startUpMap.put(each.startUpPhase(), each);
         }

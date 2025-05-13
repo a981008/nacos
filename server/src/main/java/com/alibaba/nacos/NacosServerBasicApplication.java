@@ -33,8 +33,11 @@ import org.springframework.scheduling.annotation.EnableScheduling;
  */
 @SpringBootApplication(exclude = {LdapAutoConfiguration.class})
 @ComponentScan(basePackages = "com.alibaba.nacos", excludeFilters = {
+        // 排除 com.alibaba.nacos.console 下的所有 bean
         @Filter(type = FilterType.REGEX, pattern = "com\\.alibaba\\.nacos\\.console.*"),
+        // 排除 com.alibaba.nacos.plugin.auth.impl 下的所有 bean
         @Filter(type = FilterType.REGEX, pattern = "com\\.alibaba\\.nacos\\.plugin\\.auth\\.impl.*"),
+        // 自定义规则过滤
         @Filter(type = FilterType.CUSTOM, classes = {NacosTypeExcludeFilter.class, NacosWebBeanTypeFilter.class})})
 @EnableScheduling
 public class NacosServerBasicApplication {

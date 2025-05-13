@@ -1,0 +1,23 @@
+`com.alibaba.nacos.bootstrap.NacosBootstrap`
+   1. `com.alibaba.nacos.NacosServerBasicApplication`
+   2. `com.alibaba.nacos.NacosServerWebApplication`
+   3. `com.alibaba.nacos.console.NacosConsole`
+
+```text
+com.alibaba.nacos.bootstrap.NacosBootstrap ->
+   com.alibaba.nacos.NacosServerBasicApplication ->
+      nacos-naming
+      nacos-config
+      nacos-istio
+      nacos-prometheus
+      nacos-default-plugin-all ->
+        default-auth-plugin
+        nacos-default-auth-plugin
+   com.alibaba.nacos.NacosServerWebApplication
+   com.alibaba.nacos.console.NacosConsole
+```
+
+auth-plugin 只有 merged 和 server 才会装配。主要用于，主要用于对 nacos 服务进行访问控制、身份验证和权限管理。它确保只有经过授权的用户或系统能够访问 nacos 提供的服务。 
+
+nacos 分为 server 和 cosole，server 为核心服务，负责配置管理、服务注册与发现，console 为控制台 UI。
+server 和 console 可以独立运行，也可一起运行（merged）。
