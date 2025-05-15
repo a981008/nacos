@@ -39,7 +39,12 @@ public class NacosStartUpManager {
     private final Map<String, NacosStartUp> startUpMap;
     
     private final List<NacosStartUp> startedList;
-    
+
+    /**
+     * {@link com.alibaba.nacos.console.NacosConsoleStartUp}
+     * {@link com.alibaba.nacos.core.listener.startup.NacosCoreStartUp}
+     * {@link com.alibaba.nacos.core.listener.startup.NacosWebStartUp}
+     */
     private NacosStartUpManager() {
         startUpMap = new HashMap<>();
         // 利用 SPI 发现 nacos 启动阶段

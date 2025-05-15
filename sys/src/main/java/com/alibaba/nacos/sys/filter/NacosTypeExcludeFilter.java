@@ -39,7 +39,12 @@ public class NacosTypeExcludeFilter implements TypeFilter {
     private static final Logger LOGGER = LoggerFactory.getLogger(NacosTypeExcludeFilter.class);
     
     private final Map<String, NacosPackageExcludeFilter> packageExcludeFilters;
-    
+
+    /**
+     * {@link com.alibaba.nacos.config.server.filter.ConfigEnabledFilter}
+     * {@link com.alibaba.nacos.istio.config.IstioEnabledFilter}
+     * {@link com.alibaba.nacos.naming.config.NamingEnabledFilter}
+     */
     public NacosTypeExcludeFilter() {
         this.packageExcludeFilters = new HashMap<>(2);
         // 通过 SPI 加载过滤规则
@@ -69,6 +74,8 @@ public class NacosTypeExcludeFilter implements TypeFilter {
         }
         for (Map.Entry<String, NacosPackageExcludeFilter> entry : packageExcludeFilters.entrySet()) {
             // If match the package exclude filter, judged by filter.
+            // merged 启动时需要 nacos-config、nacos-naming、nacos-istio 不做任何过滤
+            // 当使用 -Dnacos.functionMode 指定 config、naming、istio，过滤不需要的模块
             if (className.startsWith(entry.getKey())) {
                 Set<String> annotations = metadataReader.getAnnotationMetadata().getAnnotationTypes();
                 return entry.getValue().isExcluded(className, annotations);

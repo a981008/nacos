@@ -40,6 +40,11 @@ public class SpringApplicationRunListener implements org.springframework.boot.Sp
     
     private final String[] args;
 
+    /**
+     * {@link com.alibaba.nacos.core.listener.LoggingApplicationListener}
+     * {@link com.alibaba.nacos.core.listener.StartingApplicationListener}
+     * {@link com.alibaba.nacos.naming.misc.GracefulShutdownListener}
+     */
     Collection<NacosApplicationListener> nacosApplicationListeners = NacosServiceLoader.load(NacosApplicationListener.class);
 
     public SpringApplicationRunListener(SpringApplication application, String[] args) {

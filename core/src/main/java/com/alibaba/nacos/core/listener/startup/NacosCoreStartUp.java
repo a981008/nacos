@@ -171,7 +171,8 @@ public class NacosCoreStartUp extends AbstractNacosStartUp {
         WatchFileCenter.shutdown();
         NotifyCenter.shutdown();
     }
-    
+
+    // 开启对 conf/application.properties 的监听，并应用更改
     private void registerWatcher() throws NacosException {
         WatchFileCenter.registerWatcher(EnvUtil.getConfPath(), new FileWatcher() {
             @Override

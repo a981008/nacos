@@ -6,7 +6,11 @@
 ```text
 com.alibaba.nacos.bootstrap.NacosBootstrap ->
    com.alibaba.nacos.NacosServerBasicApplication ->
-      nacos-naming
+      nacos-naming -> 
+        nacos-core：spring.factories -> 
+          com.alibaba.nacos.core.code.StandaloneProfileApplicationListener
+          com.alibaba.nacos.core.code.SpringApplicationRunListener
+          nacos-persistence
       nacos-config
       nacos-istio
       nacos-prometheus
@@ -27,3 +31,5 @@ persistence 数据库分内置和外置
   * standalone 模式：`StandaloneDatabaseOperateImpl`，一个 derby
   * cluster 模式：`DistributedDatabaseOperateImpl`，raft + derby
 * 外置 MySQL、Postgres 等...
+
+nacos-common、nacos-auth、nacos-trace-plugin、nacos-consistency 都没有 bean、没有 SPI。
