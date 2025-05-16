@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-com.alibaba.nacos.console.NacosConsoleStartUp
+com.alibaba.nacos.ai.config.AiEnabledFilter

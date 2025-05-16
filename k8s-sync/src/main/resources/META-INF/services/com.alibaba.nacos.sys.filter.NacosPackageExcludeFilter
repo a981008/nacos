@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-com.alibaba.nacos.console.NacosConsoleStartUp
+com.alibaba.nacos.k8s.sync.K8sSyncEnabledFilter

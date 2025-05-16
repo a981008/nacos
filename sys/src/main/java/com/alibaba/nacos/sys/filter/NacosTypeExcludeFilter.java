@@ -75,7 +75,7 @@ public class NacosTypeExcludeFilter implements TypeFilter {
         for (Map.Entry<String, NacosPackageExcludeFilter> entry : packageExcludeFilters.entrySet()) {
             // If match the package exclude filter, judged by filter.
             // merged 启动时需要 nacos-config、nacos-naming、nacos-istio 不做任何过滤
-            // 当使用 -Dnacos.functionMode 指定 config、naming、istio，过滤不需要的模块
+            // 当使用 -Dnacos.functionMode 指定 config、naming，过滤不需要的模块
             if (className.startsWith(entry.getKey())) {
                 Set<String> annotations = metadataReader.getAnnotationMetadata().getAnnotationTypes();
                 return entry.getValue().isExcluded(className, annotations);
